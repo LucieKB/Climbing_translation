@@ -27,4 +27,6 @@ export const US_to_EU_routes = {
     "5.15a" : "9a+",
     "5.15b" : "9b",
     "5.15c" : "9b+",
-}
+} as const;
+
+// as const gives us a Type with our exact values
