@@ -1,35 +1,28 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { US_to_EU_routes } from './grades'
 
 function App() {
-  const [count, setCount] = useState(0)
+const [selectedGrade, setSelectedGrade] = useState<keyof typeof US_to_EU_routes>("5.5")
+// const selectRef = useRef(null) 
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <h1>Climbing grades</h1>
+    
+      <div style={{display:"flex", justifyContent:'space-between'}}>
+        <select onChange={({target:{value}})=> setSelectedGrade(value as keyof typeof US_to_EU_routes)}>
+          {Object.keys(US_to_EU_routes).map((grade) => <option value={grade}> {grade} </option>
+            )}
+        </select>
+        <div>
+          {US_to_EU_routes?.[selectedGrade]}
+        </div>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
 export default App
+
